@@ -93,7 +93,7 @@ booking_list_t booking_read_file(const char *filename) {
 
         if (strncmp(buffer, RECORD_FIELD_PEOPLE_COUNT,
                     RECORD_FIELD_PEOPLE_COUNT_LENGTH) == 0) {
-            /* Skip 'name:' and following spaces */
+            /* Skip 'people_count:' and following spaces */
             p += RECORD_FIELD_PEOPLE_COUNT_LENGTH + 1;
             SKIP_SPACES(p);
 
