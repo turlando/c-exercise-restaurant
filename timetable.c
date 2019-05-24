@@ -4,8 +4,9 @@
 #include "error.h"    /* Provides FATAL */
 #include "bitmask.h"  /* Provides MASK_RANGE */
 
+#define TIMETABLE_SIZE (sizeof(unsigned int) * TIMETABLE_LENGTH)
+
 #define LINE_BUFFER_LENGTH 128
-#define TIMETABLE_SIZE     (sizeof(unsigned int) * 32)
 
 struct timetable_entry {
     unsigned int day;
