@@ -1,3 +1,7 @@
+# Esempio di compito di programmazione
+
+## Traccia
+
 Vi è stato richiesto di scrivere un’applicazione in C che consenta la
 gestione informatizzata del sistema di prenotazione di un ristorante.
 
@@ -42,3 +46,11 @@ programma (almeno) delle seguenti funzioni:
 
 P.S. si consiglia di utilizzare strutture dati dinamiche
 
+## Esecuzione
+
+Compilare con `make` ed eseguire il binario `main`.
+
+### Test
+
+Per eseguire i test spostarsi nella cartella `tests`, quindi eseguire
+`make`. Verranno generati i binari eseguibili da poter lanciare come test.
