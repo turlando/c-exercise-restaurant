@@ -25,20 +25,48 @@
 #define LIST_FIRST(l) \
     (l.head)
 
+#define LIST_LAST(l) \
+    (l.tail)
+
 #define LIST_NEXT(e) \
     (e->_LIST_EL_META_FIELD.next)
 
 #define LIST_PREV(e) \
     (e->_LIST_EL_META_FIELD.prev)
 
-#define LIST_INSERT_FIRST(l, e)                      \
-    do {                                             \
-        LIST_NEXT(e) = LIST_FIRST(l);                \
-        if (LIST_FIRST(l) != NULL)                   \
-            LIST_PREV(LIST_FIRST(l)) = LIST_NEXT(e); \
-        LIST_FIRST(l) = e;                           \
-    } while(0)                                       \
+#define LIST_INSERT_AFTER(l, p, e)       \
+    do {                                 \
+        l.count += 1;                    \
+        LIST_NEXT(e) = LIST_NEXT(p);     \
+        if (LIST_NEXT(p) != NULL)        \
+            LIST_PREV(LIST_NEXT(p)) = e; \
+        else                             \
+            LIST_LAST(l) = e;            \
+        LIST_NEXT(p) = e;                \
+        LIST_PREV(e) = p;                \
+    } while(0)
 
+#define LIST_INSERT_FIRST(l, e)           \
+    do {                                  \
+        l.count += 1;                     \
+        LIST_NEXT(e) = LIST_FIRST(l);     \
+        if (LIST_FIRST(l) != NULL)        \
+            LIST_PREV(LIST_FIRST(l)) = e; \
+        else                              \
+            LIST_LAST(l) = e;             \
+        LIST_FIRST(l) = e;                \
+    } while(0)                            \
+
+#define LIST_INSERT_LAST(l, e)           \
+    do {                                 \
+        l.count += 1;                    \
+        LIST_PREV(e) = LIST_LAST(l);     \
+        if (LIST_LAST(l) != NULL)        \
+            LIST_NEXT(LIST_LAST(l)) = e; \
+        else                             \
+            LIST_FIRST(l) = e;           \
+        LIST_LAST(l) = e;                \
+    } while (0);
 
 #define	LIST_FOREACH(l, e)    \
     for ((e) = LIST_FIRST(l); \
