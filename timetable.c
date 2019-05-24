@@ -3,6 +3,7 @@
 #include <string.h>   /* Provides memset */
 #include "error.h"    /* Provides FATAL */
 #include "bitmask.h"  /* Provides MASK_RANGE */
+#include "utils.h"   /* Provides SKIP_SPACES, TWO_DIGITS_TO_UINT */
 
 #define TIMETABLE_SIZE (sizeof(unsigned int) * TIMETABLE_LENGTH)
 
@@ -13,28 +14,20 @@ struct timetable_entry {
     unsigned int hours;
 };
 
-static unsigned int two_digits_to_uint(char c0, char c1) {
-    unsigned int d0 = c0 - '0';
-    unsigned int d1 = c1 - '0';
-    return (d0 * 10) + d1;
-}
-
 static struct timetable_entry parse_entry(const char *s) {
     struct timetable_entry entry = {0U, 0U};
 
     /* We assume that the first two characters always represent
      * the day of the month.
      */
-    entry.day = two_digits_to_uint(s[0], s[1]);
+    entry.day = TWO_DIGITS_TO_UINT(s[0], s[1]);
 
     /* Move char pointer past two character that we have
      * already parsed.
      */
     s += 2;
 
-    /* Skip spaces */
-    while (*s == ' ')
-        s += 1;
+    SKIP_SPACES(s);
 
     /* If we hit a '#' or a '\n' we assume that the day we're
      * parsing is a closing day.
@@ -47,19 +40,17 @@ static struct timetable_entry parse_entry(const char *s) {
     /* Otherwise we continue parsing the line assuming we hit
      * the opening time for that day.
      */
-    unsigned int opening_time = two_digits_to_uint(s[0], s[1]);
+    unsigned int opening_time = TWO_DIGITS_TO_UINT(s[0], s[1]);
 
     /* Move char pointer past two character that we have
      * already parsed.
      */
     s += 2;
 
-    /* Skip spaces */
-    while (*s == ' ')
-        s += 1;
+    SKIP_SPACES(s);
 
     /* We assume we hit the closing time for that day */
-    unsigned int closing_time = two_digits_to_uint(s[0], s[1]);
+    unsigned int closing_time = TWO_DIGITS_TO_UINT(s[0], s[1]);
 
     entry.hours = MASK_RANGE(opening_time, closing_time);
 
