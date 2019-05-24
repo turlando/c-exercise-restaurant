@@ -24,8 +24,8 @@ struct room {
 };
 
 static const struct room rooms[] = {
-    {'A', PIZZERIA,   2U, {{4U}, {5}}},
-    {'B', PIZZERIA,   2U, {{4U}, {4}}},
+    {'A', PIZZERIA,   2U, {{4U}, {5U}}},
+    {'B', PIZZERIA,   2U, {{4U}, {4U}}},
     {'C', RESTAURANT, 1U, {{8U}}},
     {'D', RESTAURANT, 3U, {{4U}, {3U}, {3U}}},
     {'E', RESTAURANT, 4U, {{4U}, {4U}, {4U}, {2U}}}
