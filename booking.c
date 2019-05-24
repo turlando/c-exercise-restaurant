@@ -1,7 +1,6 @@
 #include "booking.h"
 #include <string.h>  /* Provides strncmp, strncpy, strcspn */
-#include "error.h"   /* Provides FATAL */
-#include "utils.h"   /* Provides SKIP_SPACES, TWO_DIGITS_TO_UINT */
+#include "utils.h"   /* Provides FATAL, SKIP_SPACES, TWO_DIGITS_TO_UINT */
 
 #define RECORD_SYNC_SEQUENCE        "---"
 #define RECORD_SYNC_SEQUENCE_LENGTH 3

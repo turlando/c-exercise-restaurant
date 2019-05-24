@@ -1,9 +1,8 @@
 #include "timetable.h"
 #include <stdio.h>    /* Provides FILE, fopen */
 #include <string.h>   /* Provides memset */
-#include "error.h"    /* Provides FATAL */
 #include "bitmask.h"  /* Provides MASK_RANGE */
-#include "utils.h"   /* Provides SKIP_SPACES, TWO_DIGITS_TO_UINT */
+#include "utils.h"    /* Provides FATAL, SKIP_SPACES, TWO_DIGITS_TO_UINT */
 
 #define TIMETABLE_SIZE (sizeof(unsigned int) * TIMETABLE_LENGTH)
 
