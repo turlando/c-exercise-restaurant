@@ -1,5 +1,5 @@
 #include "timetable.h"
-#include <stdio.h>    /* Provides FILE, fopen */
+#include <stdio.h>    /* Provides FILE, fopen,fgets */
 #include <string.h>   /* Provides memset */
 #include "bitmask.h"  /* Provides MASK_RANGE */
 #include "utils.h"    /* Provides FATAL, SKIP_SPACES, TWO_DIGITS_TO_UINT */
@@ -51,6 +51,12 @@ static struct timetable_entry parse_entry(const char *s) {
     /* We assume we hit the closing time for that day */
     unsigned int closing_time = TWO_DIGITS_TO_UINT(s[0], s[1]);
 
+    /* In the unsigned in where re're storing the opening hours
+     * we flip from 0 to 1 the bits in the interval from 0 to 23
+     * representing the opening hours of the restaurant.
+     * If the restaurant is open from 19:00 to 22:00 the 19th bit
+     * to the 21th bit (included) will be flipped to 1.
+     */
     entry.hours = MASK_RANGE(opening_time, closing_time);
 
     return entry;

@@ -7,17 +7,32 @@
 #define TIMETABLE_FILE "test_timetable.txt"
 
 void print_timetable(struct timetable t) {
-    for (unsigned int i = 1; i < 32; ++i) {
+    /* Loop over each day in the timetable.
+     * We skip the first element (indexed by 0) since
+     * the first day of the month is indexed by 1 and
+     * since it doesn't contain any meaningful information.
+     */
+    for (unsigned int i = 1; i < TIMETABLE_LENGTH; ++i) {
+
         printf("Day: %02u\n", i);
-        if (t._[i] == 0) {
+
+        /* If all the bits of the day are set to zero then
+         * the restaurant is closed.
+         */
+        if (t._[i] == 0U)
             printf("Closed");
-        } else {
-            for (unsigned int j = 0; j < 24; ++j) {
-                if ((1U << j) & t._[i]) {
+
+        /* Otherwise we print when the restaurant is open in
+         * the current day.
+         */
+        else
+            /* We iterate over each hour n in a day (from 0 to 23)
+             * and we print if the nth bit in the integer is flipped.
+            */
+            for (unsigned int j = 0; j < TIMETABLE_HOURS_IN_DAY; ++j)
+                if ((1U << j) & t._[i])
                     printf("%2d:00-%2d:00 ", j, j + 1);
-                }
-            }
-        }
+
         printf("\n---\n");
     }
 }
