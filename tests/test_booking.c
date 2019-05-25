@@ -1,5 +1,7 @@
 #include "../booking.h"
+#include <stdbool.h>
 #include <stdio.h>
+#include <assert.h>
 
 #define BOOKING_FILE "test_booking.txt"
 
@@ -21,6 +23,12 @@ int main(void) {
     LIST_FOREACH(list, el) {
         print_record(el->_);
     }
+
+    struct booking possible_booking = {1, 19, PIZZERIA, "Mario", 1};
+    assert(booking_is_possible(list, possible_booking) == true);
+
+    struct booking impossible_booking = {1, 19, PIZZERIA, "Mario", 6};
+    assert(booking_is_possible(list, impossible_booking) == false);
 
     return 0;
 }

@@ -22,5 +22,6 @@ struct booking_list_el {
 typedef LIST_TYPE(struct booking_list_el) booking_list_t;
 
 booking_list_t booking_read_file(const char *filename);
+bool booking_is_possible(booking_list_t bookings, struct booking booking);
 
 #endif /* __RESTAURANT_BOOKING__ */

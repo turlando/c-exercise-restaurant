@@ -1,6 +1,8 @@
 #include "booking.h"
-#include <string.h>  /* Provides strncmp, strncpy, strcspn */
-#include "utils.h"   /* Provides FATAL, SKIP_SPACES, TWO_DIGITS_TO_UINT */
+#include <stdbool.h>  /* Provides bool */
+#include <string.h>   /* Provides strncmp, strncpy, strcspn */
+#include "bitmask.h"  /* Provides MASK_BIT */
+#include "utils.h"    /* Provides FATAL, SKIP_SPACES, TWO_DIGITS_TO_UINT */
 
 #define RECORD_SYNC_SEQUENCE        "---"
 #define RECORD_SYNC_SEQUENCE_LENGTH 3
@@ -117,4 +119,80 @@ booking_list_t booking_read_file(const char *filename) {
     }
 
     return list;
+}
+
+static struct room_tables_availability
+get_available_tables(booking_list_t bookings,
+                    unsigned int day, unsigned int hour) {
+
+    struct room_tables_availability availability;
+    memset(availability._, 0, ROOM_TABLES_AVAILABILITY_SIZE);
+
+    bool skip = false;
+    struct booking_list_el *booking = NULL;
+
+    /* Looping over each booking */
+    LIST_FOREACH(bookings, booking) {
+        skip = false;
+
+        /* Filtering bookings by day and hour */
+        if (booking->_.day == day && booking->_.hour == hour)
+
+            /* Looping over each room.
+             * Reading from global static constant rooms found in room.h
+             */
+            for (unsigned int room_id = 0;
+                 room_id < ROOM_COUNT && (! skip);
+                 ++room_id)
+
+                /* Filtering rooms by type */
+                if (rooms[room_id].type == booking->_.room_type)
+
+                    /* Looping over each table in a room */
+                    for (unsigned int table_id = 0;
+                         table_id < rooms[room_id].tables_count;
+                         ++table_id)
+
+                        /* Check if the table can be used for the prenotation */
+                        if ((! (availability._[room_id] & MASK_BIT(table_id))
+                             && (rooms[room_id].tables[table_id].seats >=
+                                 booking->_.people_count))) {
+
+                            availability._[room_id] |= MASK_BIT(table_id);
+
+                            /* Skip to the next booking breaking the loop
+                             * over the tables.
+                             */
+                            skip = true;
+                            break;
+                        }
+    }
+
+    return availability;
+}
+
+bool booking_is_possible(booking_list_t bookings, struct booking booking) {
+    struct room_tables_availability availability
+        = get_available_tables(bookings, booking.day, booking.hour);
+
+    /* Looping over each room.
+     * Reading from global static constant rooms found in room.h
+     */
+    for (unsigned int room_id = 0; room_id < ROOM_COUNT; ++room_id)
+
+        /* Filtering rooms by type */
+        if (rooms[room_id].type == booking.room_type)
+
+            /* Looping over each table in a room */
+            for (unsigned int table_id = 0;
+                 table_id < rooms[room_id].tables_count;
+                 ++table_id)
+
+                /* Check if the table can be used for the prenotation */
+                if ((! (availability._[room_id] & MASK_BIT(table_id))
+                     && (rooms[room_id].tables[table_id].seats >=
+                         booking.people_count)))
+                    return true;
+
+    return false;
 }
