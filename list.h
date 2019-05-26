@@ -1,6 +1,7 @@
 #ifndef __RESTAURANT_LIST__
 #define __RESTAURANT_LIST__
 
+#include <stdbool.h> /* Provides bool */
 #include <stddef.h>  /* Provides size_t */
 #include <stdlib.h>  /* Provides calloc */
 
@@ -21,6 +22,9 @@
 
 #define NEW_LIST() \
     {0, NULL, NULL}
+
+#define LIST_IS_EMPTY(l) \
+    (l.count == 0 ? true : false)
 
 #define LIST_FIRST(l) \
     (l.head)
@@ -66,7 +70,27 @@
         else                             \
             LIST_FIRST(l) = e;           \
         LIST_LAST(l) = e;                \
-    } while (0);
+    } while (0)
+
+#define LIST_REMOVE(l, e)                            \
+    do {                                             \
+        l.count -= 1;                                \
+        if (LIST_NEXT(e) != NULL)                    \
+            LIST_PREV(LIST_NEXT(e)) = LIST_PREV(e);  \
+        else                                         \
+            /* If there is not a next element then   \
+             * the previous becomes the new last     \
+             * element in the list.                  \
+             */                                      \
+            LIST_LAST(l) = LIST_PREV(e);             \
+        /* If there is not a prev element then the   \
+         * previous becomes the new last element     \
+         * in the list.                              \
+         */                                          \
+        if (LIST_PREV(e) == NULL)                    \
+            LIST_FIRST(l) = LIST_NEXT(e);            \
+        LIST_PREV(e) = LIST_NEXT(e);                 \
+    } while (0)
 
 #define	LIST_FOREACH(l, e)    \
     for ((e) = LIST_FIRST(l); \
