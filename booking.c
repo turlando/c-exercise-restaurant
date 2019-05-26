@@ -155,7 +155,7 @@ get_available_tables(booking_list_t bookings,
 
                         /* Check if the table can be used for the prenotation */
                         if ((! (availability._[room_id] & MASK_BIT(table_id))
-                             && (rooms[room_id].tables[table_id].seats >=
+                             && (rooms[room_id].tables[table_id].seats ==
                                  booking->_.people_count))) {
 
                             availability._[room_id] |= MASK_BIT(table_id);
@@ -190,7 +190,7 @@ bool booking_is_possible(booking_list_t bookings, struct booking booking) {
 
                 /* Check if the table can be used for the prenotation */
                 if ((! (availability._[room_id] & MASK_BIT(table_id))
-                     && (rooms[room_id].tables[table_id].seats >=
+                     && (rooms[room_id].tables[table_id].seats ==
                          booking.people_count)))
                     return true;
 
