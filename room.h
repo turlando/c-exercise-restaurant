@@ -1,8 +1,6 @@
 #ifndef __RESTAURANT_ROOM__
 #define __RESTAURANT_ROOM__
 
-#include <stdbool.h>
-
 #define ROOM_COUNT      5
 #define ROOM_MAX_TABLES 16
 
