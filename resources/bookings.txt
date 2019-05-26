@@ -1,0 +1,13 @@
+---
+day:          01
+hour:         12
+room_type:    R
+name:         Mario Rossi
+people_count: 04
+---
+day:          02
+hour:         19
+room_type:    P
+name:         Luigi Bianchi
+people_count: 03
+---
