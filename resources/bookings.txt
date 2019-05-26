@@ -1,13 +1,37 @@
 ---
 day:          01
-hour:         12
+hour:         19
 room_type:    R
-name:         Mario Rossi
+name:         Alfio Calabrese
 people_count: 04
 ---
-day:          02
+day:          01
 hour:         19
 room_type:    P
-name:         Luigi Bianchi
+name:         Ginevra Siciliani
+people_count: 04
+---
+day:          01
+hour:         19
+room_type:    R
+name:         Abramo Genovese
 people_count: 03
+---
+day:          01
+hour:         19
+room_type:    R
+name:         Gigliola Esposito
+people_count: 02
+---
+day:          01
+hour:         19
+room_type:    R
+name:         Liliana Rizzo
+people_count: 04
+---
+day:          01
+hour:         19
+room_type:    P
+name:         Giacinto Pisani
+people_count: 04
 ---
