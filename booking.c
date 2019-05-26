@@ -122,9 +122,9 @@ booking_list_t booking_read_file(const char *filename) {
     return list;
 }
 
-static struct room_tables_availability
-get_available_tables(booking_list_t bookings,
-                    unsigned int day, unsigned int hour) {
+struct room_tables_availability
+booking_get_available_tables(booking_list_t bookings,
+                             unsigned int day, unsigned int hour) {
 
     struct room_tables_availability availability;
     memset(availability._, 0, ROOM_TABLES_AVAILABILITY_SIZE);
@@ -174,7 +174,7 @@ get_available_tables(booking_list_t bookings,
 
 bool booking_is_possible(booking_list_t bookings, struct booking booking) {
     struct room_tables_availability availability
-        = get_available_tables(bookings, booking.day, booking.hour);
+        = booking_get_available_tables(bookings, booking.day, booking.hour);
 
     /* Looping over each room.
      * Reading from global static constant rooms found in room.h
