@@ -22,6 +22,7 @@ struct booking_list_el {
 
 typedef LIST_TYPE(struct booking_list_el) booking_list_t;
 
+void booking_list_destroy(booking_list_t bookings);
 booking_list_t booking_read_file(const char *filename);
 struct room_tables_availability
 booking_get_available_tables(booking_list_t bookings,

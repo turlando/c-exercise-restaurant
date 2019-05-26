@@ -21,6 +21,15 @@
 
 #define LINE_BUFFER_LENGTH 128
 
+void booking_list_destroy(booking_list_t bookings) {
+    struct booking_list_el *e = NULL;
+    while (! LIST_IS_EMPTY(bookings)) {
+        e = LIST_FIRST(bookings);
+        LIST_REMOVE(bookings, e);
+        free(e);
+    }
+}
+
 booking_list_t booking_read_file(const char *filename) {
     FILE *fp = fopen(filename, "r");
     if (fp == NULL)

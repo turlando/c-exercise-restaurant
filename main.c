@@ -142,6 +142,8 @@ int main(int argc, char **argv) {
 
                 print_available_tables(availability);
 
+                booking_list_destroy(bookings);
+
                 return 0;
             }
 
