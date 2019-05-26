@@ -1,5 +1,6 @@
 #include "booking.h"
 #include <stdbool.h>  /* Provides bool */
+#include <stdio.h>    /* Provides FILE, fopen, fclose, fgets */
 #include <string.h>   /* Provides strncmp, strncpy, strcspn */
 #include "bitmask.h"  /* Provides MASK_BIT */
 #include "utils.h"    /* Provides FATAL, SKIP_SPACES, TWO_DIGITS_TO_UINT */
@@ -118,6 +119,8 @@ booking_list_t booking_read_file(const char *filename) {
             continue;
         }
     }
+
+    fclose(fp);
 
     return list;
 }
