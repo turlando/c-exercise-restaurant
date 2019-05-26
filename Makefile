@@ -26,6 +26,7 @@ $(NAME): $(OBJ)
 valgrind: $(NAME)
 	valgrind -v \
 	    --leak-check=full --show-leak-kinds=all \
+		--read-var-info=yes \
 	    ./$<
 
 .PHONY: clean
