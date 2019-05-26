@@ -2,9 +2,10 @@
 #define __RESTAURANT_TIMETABLE__
 
 /* Number of days in a month + padding element. */
-#define TIMETABLE_LENGTH       (31 + 1)
+#define TIMETABLE_LENGTH (31 + 1)
 
-#define TIMETABLE_HOURS_IN_DAY 24
+#define TIMETABLE_HOURS_IN_DAY 24U
+#define TIMETABLE_DAY_CLOSED   0U
 
 /* This data structure represents the opening schedule
  * of the restaurant.

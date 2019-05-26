@@ -110,7 +110,8 @@ booking_list_t booking_read_file(const char *filename) {
         if (strncmp(buffer, RECORD_SYNC_SEQUENCE,
                     RECORD_SYNC_SEQUENCE_LENGTH) == 0) {
 
-            struct booking_list_el *el = calloc(1, sizeof(struct booking_list_el));
+            struct booking_list_el *el
+                = calloc(1, sizeof(struct booking_list_el));
             el->_ = record;
             LIST_INSERT_LAST(list, el);
 
