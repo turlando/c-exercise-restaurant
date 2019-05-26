@@ -1,5 +1,5 @@
 #include "timetable.h"
-#include <stdio.h>    /* Provides FILE, fopen,fgets */
+#include <stdio.h>    /* Provides FILE, fopen, fclose, fgets */
 #include <string.h>   /* Provides memset */
 #include "bitmask.h"  /* Provides MASK_RANGE */
 #include "utils.h"    /* Provides FATAL, SKIP_SPACES, TWO_DIGITS_TO_UINT */
@@ -86,6 +86,8 @@ struct timetable timetable_read_file(const char *filename) {
          */
         timetable._[entry.day] |= entry.hours;
     }
+
+    fclose(fp);
 
     return timetable;
 }
