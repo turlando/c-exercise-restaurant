@@ -136,6 +136,14 @@ int main(int argc, char **argv) {
                 unsigned int day = TWO_DIGITS_TO_UINT(arg_day[0], arg_day[1]);
                 unsigned int hour = TWO_DIGITS_TO_UINT(arg_hour[0], arg_hour[1]);
 
+                struct timetable timetable = timetable_read_file(TIMETABLE_FILE);
+
+                if (! timetable_is_open_day(timetable, day))
+                    FATAL("%s\n", "Restaurant is closed on this day.");
+
+                if (! timetable_is_open_hour(timetable, day, hour))
+                    FATAL("%s\n", "Restaurant is closed at this time.");
+
                 booking_list_t bookings = booking_read_file(BOOKINGS_FILE);
                 struct room_tables_availability availability =
                     booking_get_available_tables(bookings, day, hour);

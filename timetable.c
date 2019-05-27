@@ -1,4 +1,5 @@
 #include "timetable.h"
+#include <stdbool.h>  /* Provides bool */
 #include <stdio.h>    /* Provides FILE, fopen, fclose, fgets */
 #include <string.h>   /* Provides memset */
 #include "bitmask.h"  /* Provides MASK_RANGE */
@@ -90,4 +91,13 @@ struct timetable timetable_read_file(const char *filename) {
     fclose(fp);
 
     return timetable;
+}
+
+bool timetable_is_open_day(struct timetable timetable, unsigned int day) {
+    return (timetable._[day] == 0U ? false : true);
+}
+
+bool timetable_is_open_hour(struct timetable timetable,
+                            unsigned int day, unsigned int hour) {
+    return (MASK_BIT(hour) & timetable._[day] ? true : false);
 }

@@ -1,6 +1,8 @@
 #ifndef __RESTAURANT_TIMETABLE__
 #define __RESTAURANT_TIMETABLE__
 
+#include <stdbool.h>
+
 /* Number of days in a month + padding element. */
 #define TIMETABLE_LENGTH (31 + 1)
 
@@ -23,5 +25,8 @@ struct timetable {
 };
 
 struct timetable timetable_read_file(const char *filename);
+bool timetable_is_open_day(struct timetable timetable, unsigned int day);
+bool timetable_is_open_hour(struct timetable timetable,
+                            unsigned int day, unsigned int hour);
 
 #endif /* __RESTAURANT_TIMETABLE__ */
