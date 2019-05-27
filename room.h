@@ -24,7 +24,6 @@ enum room_type {
  * more fields is easier.
  */
 struct table {
-    unsigned int id;
     unsigned int seats;
 };
 
@@ -40,17 +39,17 @@ struct room_tables_availability {
 };
 
 static const struct room rooms[ROOM_COUNT] = {
-    {'A', PIZZERIA,   2U, {{1U << 1, 4U},      /* 00 */
-                           {1U << 2, 5U}}},
-    {'B', PIZZERIA,   1U, {{1U << 1, 4U}}},    /* 01 */
-    {'C', RESTAURANT, 1U, {{1U << 1, 8U}}},    /* 02 */
-    {'D', RESTAURANT, 3U, {{1U << 1, 4U},      /* 03 */
-                           {1U << 2, 3U},
-                           {1U << 3, 3U}}},
-    {'E', RESTAURANT, 4U, {{1U << 1, 4U},      /* 04 */
-                           {1U << 2, 4U},
-                           {1U << 3, 4U},
-                           {1U << 4, 2U}}}
+    {'A', PIZZERIA,   2U, {{4U},      /* 0.0 */
+                           {5U}}},    /* 0.1 */
+    {'B', PIZZERIA,   1U, {{4U}}},    /* 1.0 */
+    {'C', RESTAURANT, 1U, {{8U}}},    /* 2.0 */
+    {'D', RESTAURANT, 3U, {{4U},      /* 3.0 */
+                           {3U},      /* 3.1 */
+                           {3U}}},    /* 3.2 */
+    {'E', RESTAURANT, 4U, {{4U},      /* 4.0 */
+                           {4U},      /* 4.1 */
+                           {4U},      /* 4.2 */
+                           {2U}}}     /* 4.3 */
 };
 
 #endif /* __RESTAURANT_ROOM__ */
