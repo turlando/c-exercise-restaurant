@@ -99,5 +99,5 @@ bool timetable_is_open_day(struct timetable timetable, unsigned int day) {
 
 bool timetable_is_open_hour(struct timetable timetable,
                             unsigned int day, unsigned int hour) {
-    return (MASK_BIT(hour) & timetable._[day] ? true : false);
+    return ((timetable._[day] & MASK_BIT(hour)) ? true : false);
 }

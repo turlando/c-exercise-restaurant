@@ -2,7 +2,7 @@
 #define __RESTAURANT_BITMASK__
 
 #define MASK_BIT(n) \
-    (1U << n)
+    (1U << (n))
 
 /* Mask the bits from start (inclusive) to end (exclusive).
  * Return a 32 bit unsigned integer.

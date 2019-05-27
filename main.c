@@ -59,11 +59,11 @@ void print_timetable(struct timetable timetable) {
         int to   = -1;
 
         for (unsigned int hour = 0; hour < TIMETABLE_HOURS_IN_DAY; ++hour)
-            if ((1U << hour) & timetable._[day]) {
+            if (timetable._[day] & MASK_BIT(hour)) {
                 if (from == -1)
                     from = hour;
 
-                if (! ((1U << (hour + 1)) & timetable._[day])) {
+                if (! (timetable._[day] & MASK_BIT(hour + 1))) {
                     to = hour + 1;
                     printf("%2d:00 - %2d:00   ", from, to);
 
